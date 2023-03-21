@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import "./Header.css"
 import RegisterModal from './RegisterModal';
 import LoginModal from './LoginModal';
@@ -31,12 +32,12 @@ const Header = () => {
     return (
         <header>
             <div className="left">
-                <h1>FreeStuff</h1>
+                <a href='src#'><h1>FreeStuff</h1></a>
             </div>
             <div className="right">
                 <div className="links">
-                    <a href="#">Home</a>
-                    <a href="#">Map</a>
+                    <Link to="/">Home</Link>
+                    <Link to="/map">Map</Link>
                 </div>
                 <div className="buttons">
                     {isLoggedIn ? (
