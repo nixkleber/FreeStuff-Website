@@ -1,0 +1,65 @@
+.login-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.login-modal h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.login-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.login-modal .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.login-modal label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.login-modal input[type="email"],
+.login-modal input[type="password"] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 16px;
+}
+
+.login-modal .error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.login-modal .success-message {
+    color: green;
+    margin-top: 10px;
+}
+
+.login-modal button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.login-modal button[type="submit"]:hover {
+    background-color: #0069d9;
+}
