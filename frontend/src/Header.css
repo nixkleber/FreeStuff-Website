@@ -13,12 +13,15 @@ header {
 .right {
     display: flex;
     align-items: center;
+    flex-direction: row; /* add this line to display the child elements horizontally */
 }
+
 
 .links {
     display: flex;
     align-items: center;
     margin-right: 20px;
+    order: -1; /* this moves the links div to the start of the flexbox container */
 }
 
 .links a {

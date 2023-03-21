@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./Header.css"
 import RegisterModal from './RegisterModal';
 import LoginModal from './LoginModal';
 
