@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import "./Header.css"
 import RegisterModal from './RegisterModal';
 import LoginModal from './LoginModal';
@@ -32,21 +32,21 @@ const Header = () => {
     return (
         <header>
             <div className="left">
-                <a href='src#'><h1>FreeStuff</h1></a>
+                <Link to="/"><h1>Free Stuff</h1></Link>
             </div>
             <div className="right">
                 <div className="links">
-                    <Link to="/">Home</Link>
-                    <Link to="/map">Map</Link>
+                    <div className="links">
+                        <NavLink exact to="/" activeClassName="active">Home</NavLink>
+                        <NavLink exact to="/map" activeClassName="active">Map</NavLink>
+                    </div>
                 </div>
                 <div className="buttons">
-                    {isLoggedIn ? (
-                        <button onClick={handleLogoutClick}>Logout</button>
-                    ) : (
-                        <button onClick={handleLoginClick}>Login</button>
-                    )}
+                    <button id="logButton" onClick={isLoggedIn ? handleLogoutClick : handleLoginClick}>
+                        {isLoggedIn ? "Logout" : "Login"}
+                    </button>
                     {!isLoggedIn && (
-                        <button onClick={handleSignUpClick}>Sign up</button>
+                        <button id="registerButton" onClick={handleSignUpClick}>Sign up</button>
                     )}
                 </div>
             </div>
