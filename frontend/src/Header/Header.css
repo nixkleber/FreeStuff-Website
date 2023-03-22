@@ -2,8 +2,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background-color: white;
+     background-color: white;
+
+    margin: 0 100px;
 }
 
 .left a {
@@ -50,7 +51,7 @@ header {
     align-items: center;
 }
 
-.buttons button{
+.buttons button {
     box-sizing: border-box;
 
     width: 100px;
@@ -68,12 +69,12 @@ header {
 
 }
 
-.buttons button#logButton{
+.buttons button#logButton {
     border: 2px solid #FE753E;
     color: #FE8351;
 }
 
-.buttons button#registerButton{
+.buttons button#registerButton {
     background-color: #FE8351;
     border: 2px solid #FE753E;
     color: white;

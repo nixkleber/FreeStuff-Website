@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import L from "leaflet";
+import locations from "../Map/locations";
 
 function Home() {
-    return (<div><h1>Home Page</h1></div>);
+
+    return (
+        <h1>HomePage</h1>
+    );
 }
 
 export default Home;

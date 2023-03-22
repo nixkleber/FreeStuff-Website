@@ -32,13 +32,13 @@ const Header = () => {
     return (
         <header>
             <div className="left">
-                <Link to="/"><h1>Free Stuff</h1></Link>
+                <NavLink to="/"><h1>Free Stuff</h1></NavLink>
             </div>
             <div className="right">
                 <div className="links">
                     <div className="links">
-                        <NavLink exact to="/" activeClassName="active">Home</NavLink>
-                        <NavLink exact to="/map" activeClassName="active">Map</NavLink>
+                        <NavLink to="/" activeclassname="active">Home</NavLink>
+                        <NavLink to="/map" activeclassname="active">Map</NavLink>
                     </div>
                 </div>
                 <div className="buttons">
