@@ -21,6 +21,21 @@
     color: #FE753E;
 }
 
+.info-details {
+    margin-top: 20px;
+    width: 100%;
+    text-align: left;
+}
+
+.info-details td {
+    padding-right: 20px;
+}
+
+.info-details-left {
+    font-weight: 500;
+}
+
+
 .map-container, .info-container {
     border-radius: 60px;
     overflow: hidden;
@@ -31,6 +46,10 @@
     .map-page {
         flex-direction: column;
         margin: 0;
+    }
+
+    .map-container {
+        margin-right: 0;
     }
 
 }

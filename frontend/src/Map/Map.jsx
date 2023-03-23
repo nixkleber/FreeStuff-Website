@@ -17,7 +17,7 @@ function createMap() {
     return map;
 }
 
-function addMarkersToMap(map, setSelectedLocation) {
+function addMarkersToMap(map, setSelectedLocation, locations) {
     const myIcon = L.icon({
         iconUrl: markerIcon,
         iconSize: [38, 38],
@@ -33,6 +33,8 @@ function addMarkersToMap(map, setSelectedLocation) {
 
 function Map() {
     const [selectedLocation, setSelectedLocation] = useState(null);
+    const [locations, setLocations] = useState([]);
+
 
     useEffect(() => {
         const mapContainer = L.DomUtil.get('map');
@@ -40,7 +42,13 @@ function Map() {
             mapContainer._leaflet_id = null;
         }
         const map = createMap();
-        addMarkersToMap(map, setSelectedLocation);
+
+        fetch('http://localhost:8080/api/locations')
+            .then(response => response.json())
+            .then(locations => {
+                setLocations(locations);
+                addMarkersToMap(map, setSelectedLocation, locations);
+            });
     }, []);
 
 
@@ -54,10 +62,22 @@ function Map() {
                     <>
                         <h2>{selectedLocation.title}</h2>
                         <img src={selectedLocation.image} alt={selectedLocation.title}/>
-                        <p>{selectedLocation.description}</p>
+                        <table className="info-details">
+                            <tbody>
+                            <tr>
+                                <td className="info-details-left"><p>Description:</p></td>
+                                <td><p>{selectedLocation.description}</p></td>
+                            </tr>
+                            <tr>
+                                <td className="info-details-left"><p>Since:</p></td>
+                                <td><p>{selectedLocation.since}</p></td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </>
                 )}
             </div>
+
         </div>
     );
 }
