@@ -2,7 +2,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-     background-color: white;
+    background-color: white;
 
     margin: 0 100px;
 }
@@ -29,8 +29,8 @@ header {
 .links {
     display: flex;
     align-items: center;
-    margin-right: 20px;
     order: -1; /* this moves the links div to the start of the flexbox container */
+    margin-right: 15px;
 }
 
 .links a {
@@ -78,4 +78,37 @@ header {
     background-color: #FE8351;
     border: 2px solid #FE753E;
     color: white;
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .left h1 {
+        font-size: 36px;
+    }
+
+    .right {
+        flex-direction: column;
+    }
+
+    .links {
+        order: 2;
+        margin-right: 0;
+    }
+
+    .buttons {
+        max-height: 40px;
+    }
+
+    .buttons button {
+        width: 75px;
+        height: 32px;
+    }
+
 }
