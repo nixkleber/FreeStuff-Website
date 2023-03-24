@@ -33,8 +33,7 @@
     margin-bottom: 5px;
 }
 
-.login-modal input[type="email"],
-.login-modal input[type="password"] {
+.login-modal input {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;

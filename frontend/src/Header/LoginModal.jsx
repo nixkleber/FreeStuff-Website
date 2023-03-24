@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import Modal from 'react-modal';
+
+import {LoginContext} from "../Security/LoginProvider";
 
 import './LoginModal.css';
 
@@ -8,6 +10,8 @@ function LoginModal(props) {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+
+    const { setIsLoggedIn } = useContext(LoginContext);
 
     const customStyles = {
         content: {
@@ -39,6 +43,7 @@ function LoginModal(props) {
                     setTimeout(() => {
                         setSuccessMessage('');
                         props.onRequestClose();
+                        setIsLoggedIn(true);
                         props.onLoginSuccess(); // call onLoginSuccess prop
                     }, 2000); // hide success message after 2 seconds and close modal
                 } else {

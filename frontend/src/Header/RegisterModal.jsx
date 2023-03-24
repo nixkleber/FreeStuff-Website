@@ -5,6 +5,7 @@ import './RegisterModal.css';
 
 function RegisterModal(props) {
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -31,7 +32,7 @@ function RegisterModal(props) {
         fetch('http://localhost:8080/api/users/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email, username, password }),
         })
             .then((response) => {
                 if (response.ok) {
@@ -57,6 +58,7 @@ function RegisterModal(props) {
 
     function flushInputFields() {
         setEmail('');
+        setUsername('');
         setPassword('');
         setConfirmPassword('');
         setErrorMessage('');
@@ -81,6 +83,16 @@ function RegisterModal(props) {
                             id="email"
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="username">Username:</label>
+                        <input
+                            type="username"
+                            className="form-control"
+                            id="username"
+                            value={username}
+                            onChange={(event) => setUsername(event.target.value)}
                         />
                     </div>
                     <div className="form-group">

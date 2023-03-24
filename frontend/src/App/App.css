@@ -2,6 +2,6 @@
     text-align: center;
 }
 
-a, p, h1, h2 {
+a, p, h1, h2, h3, input, textarea, button, label {
     font-family: "Rubik", sans-serif;
 }

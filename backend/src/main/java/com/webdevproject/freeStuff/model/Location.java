@@ -20,4 +20,5 @@ public class Location {
     private String description;
     private LocalDateTime since;
     private boolean available;
+    private String byUser;
 }

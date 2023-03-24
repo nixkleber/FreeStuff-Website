@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import "./Header.css"
 import RegisterModal from './RegisterModal';
 import LoginModal from './LoginModal';
+import {LoginContext} from "../Security/LoginProvider";
 
-const Header = () => {
+
+function Header() {
     const [showRegisterModal, setShowRegisterModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const {isLoggedIn, setIsLoggedIn} = useContext(LoginContext); // update the isLoggedIn state from the context
 
     const handleSignUpClick = () => {
         setShowRegisterModal(true);
@@ -38,7 +41,7 @@ const Header = () => {
                 <div className="links">
                     <div className="links">
                         <NavLink to="/" activeclassname="active">Home</NavLink>
-                        <NavLink to="/map" activeclassname="active">Map</NavLink>
+                        {isLoggedIn && <NavLink to="/map" activeclassname="active">Map</NavLink>}
                     </div>
                 </div>
                 <div className="buttons">

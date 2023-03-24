@@ -31,9 +31,7 @@
     margin-bottom: 5px;
 }
 
-.register-modal input[type="text"],
-.register-modal input[type="email"],
-.register-modal input[type="password"] {
+.register-modal input {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
