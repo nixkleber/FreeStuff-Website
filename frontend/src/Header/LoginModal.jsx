@@ -11,7 +11,7 @@ function LoginModal(props) {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
-    const { setIsLoggedIn } = useContext(LoginContext);
+    const {setIsLoggedIn, setUsername} = useContext(LoginContext);
 
     const customStyles = {
         content: {
@@ -29,8 +29,8 @@ function LoginModal(props) {
         event.preventDefault();
         fetch('http://localhost:8080/api/users/login', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password}),
         })
             .then((response) => {
                 if (response.ok) {
@@ -44,7 +44,13 @@ function LoginModal(props) {
                         setSuccessMessage('');
                         props.onRequestClose();
                         setIsLoggedIn(true);
-                        props.onLoginSuccess(); // call onLoginSuccess prop
+
+                        fetch(`http://localhost:8080/api/users?email=${email}`)
+                            .then((response) => response.text())
+                            .then((data) => {
+                                const parsedData = JSON.parse(data);
+                                setUsername(parsedData.username);
+                            });
                     }, 2000); // hide success message after 2 seconds and close modal
                 } else {
                     setErrorMessage('Email or Password incorrect!');

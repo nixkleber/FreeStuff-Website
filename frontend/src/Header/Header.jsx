@@ -12,6 +12,8 @@ function Header() {
 
     const {isLoggedIn, setIsLoggedIn} = useContext(LoginContext); // update the isLoggedIn state from the context
 
+    const {username, setUsername} = useContext(LoginContext);
+
     const handleSignUpClick = () => {
         setShowRegisterModal(true);
     };
@@ -22,14 +24,7 @@ function Header() {
 
     const handleLogoutClick = () => {
         setIsLoggedIn(false);
-    };
-
-    const handleRegistrationSuccess = () => {
-        setIsLoggedIn(true);
-    };
-
-    const handleLoginSuccess = () => {
-        setIsLoggedIn(true);
+        setUsername(null);
     };
 
     return (
@@ -51,17 +46,18 @@ function Header() {
                     {!isLoggedIn && (
                         <button id="registerButton" onClick={handleSignUpClick}>Sign up</button>
                     )}
+                    {isLoggedIn && (
+                        <div>Logged in as: {username}</div>
+                    )}
                 </div>
             </div>
             <RegisterModal
                 isOpen={showRegisterModal}
                 onRequestClose={() => setShowRegisterModal(false)}
-                onRegistrationSuccess={handleRegistrationSuccess}
             />
             <LoginModal
                 isOpen={showLoginModal}
                 onRequestClose={() => setShowLoginModal(false)}
-                onLoginSuccess={handleLoginSuccess}
                 setLoggedIn={setIsLoggedIn}
             />
         </header>

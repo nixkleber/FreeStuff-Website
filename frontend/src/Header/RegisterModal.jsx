@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import Modal from 'react-modal';
 
 import './RegisterModal.css';
+import {LoginContext} from "../Security/LoginProvider";
 
 function RegisterModal(props) {
     const [email, setEmail] = useState('');
@@ -10,6 +11,8 @@ function RegisterModal(props) {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+
+    const {setIsLoggedIn, setUsername: setLoginUsername} = useContext(LoginContext);
 
     const customStyles = {
         content: {
@@ -31,19 +34,27 @@ function RegisterModal(props) {
         }
         fetch('http://localhost:8080/api/users/register', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, username, password }),
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, username, password}),
         })
             .then((response) => {
                 if (response.ok) {
                     // Registration was successful
-                    flushInputFields();
+
 
                     setSuccessMessage('Registration successful!');
                     setTimeout(() => {
                         setSuccessMessage('');
-                        props.onRegistrationSuccess(); // call onRegistrationSuccess prop
                         props.onRequestClose();
+                        setIsLoggedIn(true);
+
+                        fetch(`http://localhost:8080/api/users?email=${email}`)
+                            .then((response) => response.text())
+                            .then((data) => {
+                                const parsedData = JSON.parse(data);
+                                setLoginUsername(parsedData.username);
+                            });
+                        flushInputFields();
                     }, 2000); // hide success message after 2 seconds and close modal
                 } else {
                     setErrorMessage('Email already exists!');

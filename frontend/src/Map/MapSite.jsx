@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import L from 'leaflet';
 import './MapSite.css';
 import markerIconOrange from './markerIconOrange.png'
 import markerIconGreen from './markerIconGreen.png'
+import {LoginContext} from "../Security/LoginProvider";
 
 function MapSite() {
     const [selectedLocation, setSelectedLocation] = useState(null);
@@ -16,6 +17,8 @@ function MapSite() {
     const [isAddingLocation, setIsAddingLocation] = useState(false);
 
     const [newLocationCoordinates, setNewLocationCoordinates] = useState(null);
+
+    const {userName} = useContext(LoginContext);
 
     function createMap() {
         const map = L.map('map', {
@@ -138,7 +141,8 @@ function MapSite() {
             lat: newLocationCoordinates[0],
             lng: newLocationCoordinates[1],
             since: new Date().toISOString(),
-            available: true
+            available: true,
+            byUser: userName,
         };
         console.log(formData); // do something with the form data
 
@@ -196,6 +200,10 @@ function MapSite() {
                             <tr>
                                 <td className="info-details-left"><p>Since:</p></td>
                                 <td><p>{selectedLocation.since}</p></td>
+                            </tr>
+                            <tr>
+                                <td className="info-details-left"><p>gifted by:</p></td>
+                                <td><p>{userName}</p></td>
                             </tr>
                             </tbody>
                         </table>

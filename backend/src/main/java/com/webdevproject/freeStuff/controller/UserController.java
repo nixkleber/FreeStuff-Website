@@ -19,6 +19,19 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("")
+    public ResponseEntity<String> getUsernameByEmail(@RequestParam String email) {
+        Optional<String> optionalUsername = userRepository.findUsernameByEmail(email);
+        if (optionalUsername.isPresent()) {
+            logger.info("Username retrieved successfully");
+            logger.info(optionalUsername.get());
+            return ResponseEntity.ok(optionalUsername.get());
+        }
+
+        logger.error("User not found");
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
