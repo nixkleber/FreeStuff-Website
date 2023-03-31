@@ -1,5 +1,6 @@
 package com.webdevproject.freeStuff.controller;
 
+import com.webdevproject.freeStuff.model.Location;
 import com.webdevproject.freeStuff.model.User;
 import com.webdevproject.freeStuff.repository.UserRepository;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -54,5 +56,55 @@ public class UserController {
 
         logger.error("Invalid email or password");
         return ResponseEntity.badRequest().body("Invalid email or password");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody User user) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.setEmail(user.getEmail());
+            existingUser.setPassword(user.getPassword());
+            userRepository.save(existingUser);
+            logger.info("User updated successfully");
+            return ResponseEntity.ok("User updated successfully");
+        }
+
+        logger.error("User not found");
+        return ResponseEntity.notFound().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<?> updateUserPassword(@PathVariable String id, @RequestBody String password) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User existingUser = optionalUser.get();
+            existingUser.setPassword(password);
+            userRepository.save(existingUser);
+            logger.info("User password updated successfully");
+            return ResponseEntity.ok("User password updated successfully");
+        }
+
+        logger.error("User not found");
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            userRepository.delete(optionalUser.get());
+            logger.info("User deleted successfully");
+            return ResponseEntity.ok("User deleted successfully");
+        }
+
+        logger.error("User not found");
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
     }
 }

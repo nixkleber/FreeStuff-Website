@@ -22,7 +22,7 @@ function RegisterModal(props) {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: '400px', // set the width of the modal
+            width: '400px',
         },
     };
 
@@ -55,7 +55,7 @@ function RegisterModal(props) {
                                 setLoginUsername(parsedData.username);
                             });
                         flushInputFields();
-                    }, 2000); // hide success message after 2 seconds and close modal
+                    }, 2000);
                 } else {
                     setErrorMessage('Email already exists!');
                 }

@@ -21,7 +21,7 @@ function LoginModal(props) {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
-            width: '400px', // set the width of the modal
+            width: '400px',
         },
     };
 
@@ -51,7 +51,7 @@ function LoginModal(props) {
                                 const parsedData = JSON.parse(data);
                                 setUsername(parsedData.username);
                             });
-                    }, 2000); // hide success message after 2 seconds and close modal
+                    }, 2000);
                 } else {
                     setErrorMessage('Email or Password incorrect!');
                 }

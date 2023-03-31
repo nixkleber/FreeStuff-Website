@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import map_image from "./map_image2.png";
 import radiotower_image from "./radiotower_image.png";
 
@@ -14,6 +14,26 @@ function InfoBox({heading, text}){
 }
 
 function Home() {
+    const [locations, setLocations] = useState([]);
+    const [availableCount, setAvailableCount] = useState(0);
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        fetch('http://localhost:8080/api/locations')
+            .then(response => response.json())
+            .then(locations => {
+                setLocations(locations);
+            });
+    }, []);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/api/users/all')
+            .then(response => response.json())
+            .then(users => {
+                setUsers(users);
+            });
+    }, []);
+
     return (
         <div className="home-page">
             <div className="image-container">
@@ -25,12 +45,10 @@ function Home() {
                 </div>
             </div>
             <div className="home-info-container">
-                <InfoBox heading="5K+" text = "Free Things donated so far" />
-                <InfoBox heading="1,234" text = "Free Things available right now" />
-                <InfoBox heading="2K+" text = "Users" />
+                <InfoBox heading={`${locations.length}`} text = "Free Things donated so far" />
+                <InfoBox heading= {`${locations.length}`} text = "Free Things available right now" />
+                <InfoBox heading={`${users.length}`} text = "Users" />
             </div>
-
-
         </div>
     );
 }
